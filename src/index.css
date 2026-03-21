@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/* ── Google Fonts ─────────────────────────────────────────── */
+/* Loaded via index.html link tag for performance */
+
+/* ── CSS Variables — ChartSense Dark Theme ───────────────── */
+:root {
+  --color-dark:    #0f1117;
+  --color-panel:   #1a1d27;
+  --color-card:    #22263a;
+  --color-accent:  #4f8ef7;
+  --color-accent2: #f7a34f;
+  --color-green:   #26a69a;
+  --color-red:     #ef5350;
+  --color-gold:    #ffd700;
+  --color-white:   #e8eaf0;
+  --color-muted:   #8a8fa8;
+  --color-divider: #2e3250;
+
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+/* ── Base ────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-divider);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* ── Typography ─────────────────────────────────────────── */
+code, pre, .mono {
+  font-family: var(--font-mono);
+}
+
+/* ── Focus ───────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Animations ─────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.3s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 1.5s ease infinite;
+}
