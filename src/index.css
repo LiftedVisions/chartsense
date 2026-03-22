@@ -9,10 +9,13 @@
   --color-panel:   #1a1d27;
   --color-card:    #22263a;
   --color-accent:  #4f8ef7;
+  --color-accent-deep: #3a7bd5;
   --color-accent2: #f7a34f;
   --color-green:   #26a69a;
   --color-red:     #ef5350;
   --color-gold:    #ffd700;
+  --color-purple:  #9b87f5;
+  --color-rsi-purple: #9c27b0;
   --color-white:   #e8eaf0;
   --color-muted:   #8a8fa8;
   --color-divider: #2e3250;
@@ -93,4 +96,51 @@ code, pre, .mono {
 
 .animate-pulse-subtle {
   animation: pulse-subtle 1.5s ease infinite;
+}
+
+/* ── Landing page layout (mobile-first) ───────────────────── */
+.landing-hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 480px) {
+  .landing-hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.landing-problem-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 520px) {
+  .landing-problem-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.landing-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 520px) {
+  .landing-pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Guide page — ignore grid ───────────────────────────── */
+.guide-ignore-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 560px) {
+  .guide-ignore-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

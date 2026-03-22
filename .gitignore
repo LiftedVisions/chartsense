@@ -35,3 +35,6 @@ pnpm-debug.log*
 
 # PWA
 dev-dist/
+
+# Tooling
+.playwright-mcp/

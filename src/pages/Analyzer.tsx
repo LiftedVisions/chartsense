@@ -6,8 +6,6 @@ import RateLimitBanner from "@/components/RateLimitBanner"
 import { useAuth } from "@/contexts/AuthContext"
 import { useRateLimit } from "@/hooks/useRateLimit"
 
-const PILLS = ["BB(15,2)", "MACD(8/21/5)", "RSI(9)", "Volume", "HTF"]
-
 export default function Analyzer() {
   const [image, setImage] = useState<string | null>(null)
   const [b64, setB64]       = useState<string | null>(null)
@@ -91,37 +89,6 @@ export default function Analyzer() {
       maxWidth: 680,
       margin: "0 auto",
     }}>
-
-      {/* Header */}
-      <div style={{ textAlign: "center", marginBottom: 20 }}>
-        <div style={{ fontSize: 40, marginBottom: 4 }}>📈</div>
-        <h1 style={{
-          margin: "0 0 4px",
-          fontSize: 22,
-          fontWeight: 800,
-          color: "var(--color-white)",
-          letterSpacing: "-0.02em",
-        }}>
-          ChartSense
-        </h1>
-        <p style={{ margin: "0 0 12px", color: "var(--color-muted)", fontSize: 12 }}>
-          BB · MACD · RSI · Volume · HTF Bias — structured analysis every time
-        </p>
-        <div style={{ display: "flex", gap: 6, justifyContent: "center", flexWrap: "wrap" }}>
-          {PILLS.map(pill => (
-            <span key={pill} style={{
-              background: "var(--color-card)",
-              border: "1px solid var(--color-divider)",
-              borderRadius: 20,
-              padding: "2px 10px",
-              fontSize: 11,
-              color: "var(--color-accent)",
-            }}>
-              {pill}
-            </span>
-          ))}
-        </div>
-      </div>
 
       <AuthPanel />
 
