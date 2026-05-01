@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react"
 import { Link, NavLink } from "react-router-dom"
+import AppLogo from "@/components/AppLogo"
 
 const linkBase: CSSProperties = {
   color: "var(--color-muted)",
@@ -40,12 +41,12 @@ export default function Navbar() {
             fontWeight: 700,
             fontSize: 16,
             letterSpacing: "-0.02em",
-            display: "flex",
+            display: "inline-flex",
             alignItems: "center",
-            gap: 6,
+            gap: 8,
           }}
         >
-          <span aria-hidden>📈</span>
+          <AppLogo size={22} />
           <span>ChartSense</span>
         </Link>
 
@@ -70,16 +71,7 @@ export default function Navbar() {
           >
             Guide
           </NavLink>
-          <Link
-            to="/analyze"
-            style={{
-              ...linkBase,
-              background: "linear-gradient(135deg, var(--color-accent), var(--color-accent-deep))",
-              color: "#fff",
-              border: "none",
-              boxShadow: "0 1px 2px rgba(0,0,0,0.2)",
-            }}
-          >
+          <Link to="/analyze" className="btn-primary" style={{ padding: "8px 14px", fontSize: 14 }}>
             Analyze
           </Link>
         </div>

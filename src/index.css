@@ -13,7 +13,9 @@
   --color-accent2: #f7a34f;
   --color-green:   #26a69a;
   --color-red:     #ef5350;
-  --color-gold:    #ffd700;
+  /* Muted amber — limits / warnings (not “jackpot” gold) */
+  --color-gold:    #b59f52;
+  --color-gold-soft: #8f8358;
   --color-purple:  #9b87f5;
   --color-rsi-purple: #9c27b0;
   --color-white:   #e8eaf0;
@@ -24,9 +26,63 @@
   --font-mono: 'Space Mono', 'Courier New', monospace;
 }
 
+/* Solid primary / outline — use across pages for consistent, calm CTAs */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  box-sizing: border-box;
+  transition: background 0.15s ease, filter 0.15s ease;
+}
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  border: 1px solid var(--color-divider);
+  cursor: pointer;
+  font-family: var(--font-body);
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.btn-outline:hover {
+  border-color: color-mix(in srgb, var(--color-muted) 55%, var(--color-divider));
+  background: color-mix(in srgb, var(--color-white) 4%, transparent);
+}
+
 /* ── Base ────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html, body {
@@ -37,6 +93,11 @@ html, body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Guide in-page anchors */
+[id^="guide-"] {
+  scroll-margin-top: 12px;
 }
 
 #root {
@@ -141,6 +202,8 @@ code, pre, .mono {
 }
 
 .guide-hero-tag {
+  display: inline-flex;
+  align-items: center;
   padding: 5px 12px;
   border-radius: 999px;
   font-size: 11px;
@@ -150,6 +213,7 @@ code, pre, .mono {
   border: 1px solid var(--color-divider);
   font-family: var(--font-mono);
   cursor: pointer;
+  text-decoration: none;
   transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 

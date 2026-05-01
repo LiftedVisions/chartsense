@@ -1,4 +1,5 @@
 import { useState, type CSSProperties } from "react"
+import { Link } from "react-router-dom"
 import { useAuth } from "@/contexts/AuthContext"
 import { supabase } from "@/lib/supabase"
 
@@ -37,14 +38,13 @@ export default function AuthPanel() {
     padding: "12px 16px",
     borderRadius: 10,
     border: "none",
-    background: "linear-gradient(135deg, var(--color-accent), var(--color-accent-deep))",
+    background: "var(--color-accent)",
     color: "var(--color-white)",
     fontSize: 14,
     fontWeight: 700,
     cursor: busy ? "not-allowed" : "pointer",
     fontFamily: "var(--font-body)",
     opacity: busy ? 0.75 : 1,
-    boxShadow: "0 2px 8px color-mix(in srgb, var(--color-accent) 30%, transparent)",
   }
 
   if (loading) {
@@ -145,7 +145,10 @@ export default function AuthPanel() {
   return (
     <div style={panelStyle}>
       <p style={{ margin: "0 0 12px", fontSize: 12, color: "var(--color-muted)", lineHeight: 1.45 }}>
-        Sign in with email — we&apos;ll send you a magic link. No password.
+        Sign in with email — we&apos;ll send you a magic link. No password stored.{" "}
+        <Link to="/privacy" style={{ color: "var(--color-accent)", fontWeight: 600, textDecoration: "none" }}>
+          Privacy
+        </Link>
       </p>
       <form
         onSubmit={async (e) => {

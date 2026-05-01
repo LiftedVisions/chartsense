@@ -49,41 +49,6 @@ function Reveal({ children, style }: { children: ReactNode; style?: CSSPropertie
   )
 }
 
-const btnAccent: CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 6,
-  padding: "14px 20px",
-  borderRadius: 10,
-  background: "linear-gradient(135deg, var(--color-accent), var(--color-accent-deep))",
-  color: "var(--color-white)",
-  fontWeight: 700,
-  fontSize: 15,
-  textDecoration: "none",
-  border: "none",
-  cursor: "pointer",
-  fontFamily: "var(--font-body)",
-  boxShadow: "0 2px 8px color-mix(in srgb, var(--color-accent) 35%, transparent)",
-}
-
-const btnOutline: CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 6,
-  padding: "14px 20px",
-  borderRadius: 10,
-  background: "transparent",
-  color: "var(--color-white)",
-  fontWeight: 600,
-  fontSize: 15,
-  textDecoration: "none",
-  border: "1px solid var(--color-divider)",
-  cursor: "pointer",
-  fontFamily: "var(--font-body)",
-}
-
 export default function Landing() {
   return (
     <div style={shell}>
@@ -100,26 +65,37 @@ export default function Landing() {
               color: "var(--color-white)",
             }}
           >
-            Stop Guessing. Start Reading.
+            Structured chart analysis from a screenshot
           </h1>
           <p
             style={{
-              margin: "0 0 28px",
+              margin: "0 0 12px",
               fontSize: 16,
               lineHeight: 1.55,
               color: "var(--color-muted)",
               maxWidth: 560,
             }}
           >
-            AI-powered chart analysis using the Less Is More methodology — 5 proven indicators,
-            structured results, every time.
+            ChartSense walks through the Less Is More methodology — five indicators, same seven-part report
+            every time. Use it to study setups, not as a substitute for your own judgment.
+          </p>
+          <p
+            style={{
+              margin: "0 0 28px",
+              fontSize: 13,
+              lineHeight: 1.5,
+              color: "var(--color-muted)",
+              maxWidth: 560,
+            }}
+          >
+            AI-generated text can be wrong. For education only; not financial advice.
           </p>
           <div className="landing-hero-actions" style={{ marginBottom: 20 }}>
-            <Link to="/analyze" style={btnAccent}>
-              Analyze a Chart →
+            <Link to="/analyze" className="btn-primary">
+              Open analyzer
             </Link>
-            <Link to="/guide" style={btnOutline}>
-              Learn the Method
+            <Link to="/guide" className="btn-outline">
+              Read the methodology
             </Link>
           </div>
           <p
@@ -130,7 +106,11 @@ export default function Landing() {
               letterSpacing: "0.02em",
             }}
           >
-            Used by traders who trade less and win more
+            Built on the Less Is More framework described in the{" "}
+            <Link to="/guide" style={{ color: "var(--color-accent)", fontWeight: 600, textDecoration: "none" }}>
+              guide
+            </Link>
+            .
           </p>
         </section>
       </Reveal>
@@ -216,13 +196,13 @@ export default function Landing() {
               dotColor="var(--color-green)"
               name="Volume"
               setting="20-period MA"
-              desc="Confirms or kills every signal"
+              desc="Confirms or weakens the setup"
             />
             <IndicatorRow
-              dotColor="var(--color-gold)"
+              dotColor="var(--color-accent2)"
               name="HTF Bias"
               setting="1H check"
-              desc="Filters 80% of losing setups"
+              desc="Helps avoid trading against higher-timeframe bias"
             />
           </div>
 
@@ -239,7 +219,7 @@ export default function Landing() {
               lineHeight: 1.5,
             }}
           >
-            Nothing else. Every other indicator is redundant.
+            Nothing else. Every other indicator is redundant for this framework.
           </div>
         </section>
       </Reveal>
@@ -275,17 +255,17 @@ export default function Landing() {
               any timeframe
             </li>
             <li style={{ marginBottom: 10 }}>
-              <span style={{ color: "var(--color-white)", fontWeight: 600 }}>Drop it into ChartSense</span> with
+              <span style={{ color: "var(--color-white)", fontWeight: 600 }}>Upload it to ChartSense</span> with
               optional notes
             </li>
             <li>
-              <span style={{ color: "var(--color-white)", fontWeight: 600 }}>Get a structured 7-section analysis</span>{" "}
-              in seconds
+              <span style={{ color: "var(--color-white)", fontWeight: 600 }}>Receive a structured 7-section report</span>{" "}
+              you can compare to your own read
             </li>
           </ol>
           <div style={{ marginTop: 24 }}>
-            <Link to="/analyze" style={btnAccent}>
-              Try It Free →
+            <Link to="/analyze" className="btn-primary">
+              Try it
             </Link>
           </div>
         </section>
@@ -342,7 +322,8 @@ export default function Landing() {
             ))}
           </div>
           <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "var(--color-muted)" }}>
-            Every analysis follows the same structure. No vague commentary. No hedging. A direct verdict every time.
+            Each run follows the same sections so you can compare sessions. Treat the output as a draft checklist —
+            verify levels and bias on your chart before acting.
           </p>
         </section>
       </Reveal>
@@ -362,91 +343,58 @@ export default function Landing() {
           >
             Pricing
           </h2>
-          <div className="landing-pricing-grid">
-            <div
+          <div
+            style={{
+              padding: 20,
+              borderRadius: 12,
+              background: "var(--color-panel)",
+              border: "1px solid var(--color-divider)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+              maxWidth: 400,
+            }}
+          >
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: 28, fontWeight: 700, color: "var(--color-white)" }}>
+              $0
+            </div>
+            <ul
               style={{
-                padding: 20,
-                borderRadius: 12,
-                background: "var(--color-panel)",
-                border: "1px solid var(--color-divider)",
-                display: "flex",
-                flexDirection: "column",
-                gap: 12,
+                margin: 0,
+                paddingLeft: 18,
+                color: "var(--color-muted)",
+                fontSize: 13,
+                lineHeight: 1.7,
               }}
             >
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: 28, fontWeight: 700, color: "var(--color-white)" }}>
-                $0
-              </div>
-              <ul
-                style={{
-                  margin: 0,
-                  paddingLeft: 18,
-                  color: "var(--color-muted)",
-                  fontSize: 13,
-                  lineHeight: 1.7,
-                  flex: 1,
-                }}
-              >
-                <li>3 analyses/day</li>
-                <li>Full 7-section analysis</li>
-                <li>Less Is More methodology</li>
-              </ul>
-              <Link to="/analyze" style={{ ...btnOutline, width: "100%", boxSizing: "border-box" }}>
-                Get Started Free
-              </Link>
-            </div>
-
-            <div
-              style={{
-                padding: 20,
-                borderRadius: 12,
-                background: "var(--color-card)",
-                border: "1px solid var(--color-accent)",
-                boxShadow: "0 0 0 1px color-mix(in srgb, var(--color-accent) 18%, transparent)",
-                display: "flex",
-                flexDirection: "column",
-                gap: 12,
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 22,
-                  fontWeight: 700,
-                  color: "var(--color-white)",
-                }}
-              >
-                $8<span style={{ fontSize: 14, fontWeight: 600, color: "var(--color-muted)" }}>/month</span>
-              </div>
-              <ul
-                style={{
-                  margin: 0,
-                  paddingLeft: 18,
-                  color: "var(--color-muted)",
-                  fontSize: 13,
-                  lineHeight: 1.7,
-                  flex: 1,
-                }}
-              >
-                <li>Unlimited analyses</li>
-                <li>Everything in Free</li>
-                <li>Analysis history</li>
-                <li>Priority support</li>
-              </ul>
-              <button type="button" style={{ ...btnAccent, width: "100%", boxSizing: "border-box" }}>
-                Upgrade to Pro
-              </button>
-            </div>
+              <li>3 analyses per day</li>
+              <li>Full 7-section report</li>
+              <li>Less Is More methodology</li>
+            </ul>
+            <Link to="/analyze" className="btn-outline" style={{ width: "100%", justifyContent: "center" }}>
+              Get started
+            </Link>
           </div>
+          <p
+            style={{
+              margin: "16px 0 0",
+              fontSize: 13,
+              lineHeight: 1.55,
+              color: "var(--color-muted)",
+              maxWidth: 480,
+            }}
+          >
+            A paid tier with unlimited analyses and history is planned. We&apos;ll add checkout here when it&apos;s
+            ready — no paid upgrade is available in the app yet.
+          </p>
           <p
             style={{
               margin: "14px 0 0",
               fontSize: 11,
               color: "var(--color-muted)",
-              textAlign: "center",
             }}
           >
-            No credit card required for free tier
+            No credit card required for the free tier
           </p>
         </section>
       </Reveal>
@@ -483,6 +431,24 @@ export default function Landing() {
               style={{ color: "var(--color-accent)", fontSize: 13, fontWeight: 600, textDecoration: "none" }}
             >
               Guide
+            </Link>
+            <Link
+              to="/about"
+              style={{ color: "var(--color-accent)", fontSize: 13, fontWeight: 600, textDecoration: "none" }}
+            >
+              About
+            </Link>
+            <Link
+              to="/privacy"
+              style={{ color: "var(--color-accent)", fontSize: 13, fontWeight: 600, textDecoration: "none" }}
+            >
+              Privacy
+            </Link>
+            <Link
+              to="/terms"
+              style={{ color: "var(--color-accent)", fontSize: 13, fontWeight: 600, textDecoration: "none" }}
+            >
+              Terms
             </Link>
           </div>
           <p style={{ margin: "0 0 8px", fontSize: 11, color: "var(--color-muted)", lineHeight: 1.5 }}>

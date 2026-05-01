@@ -3,53 +3,33 @@ import { FREE_LIMIT } from "@/lib/constants"
 interface RateLimitBannerProps {
   remaining: number
   isLimited: boolean
-  onUpgradeClick: () => void
 }
 
-export default function RateLimitBanner({ remaining, isLimited, onUpgradeClick }: RateLimitBannerProps) {
+export default function RateLimitBanner({ remaining, isLimited }: RateLimitBannerProps) {
   if (isLimited) {
     return (
       <div
         className="animate-fade-in"
         style={{
           background: "var(--color-panel)",
-          border: "1px solid var(--color-gold)",
+          border: "1px solid var(--color-divider)",
           borderRadius: 10,
           padding: "16px",
           marginBottom: 14,
         }}
       >
-        <div style={{ fontWeight: 700, color: "var(--color-gold)", marginBottom: 6, fontSize: 14 }}>
+        <div style={{ fontWeight: 600, color: "var(--color-white)", marginBottom: 8, fontSize: 14 }}>
           Daily limit reached
         </div>
-        <div style={{ color: "var(--color-muted)", fontSize: 13, marginBottom: 14 }}>
-          You've used your {FREE_LIMIT} free analyses for today. Upgrade to Pro for unlimited access.
-        </div>
-        <button
-          onClick={onUpgradeClick}
-          style={{
-            width: "100%",
-            padding: "12px",
-            background: "linear-gradient(135deg, var(--color-accent), #3a7bd5)",
-            border: "none",
-            borderRadius: 8,
-            color: "white",
-            fontSize: 14,
-            fontWeight: 700,
-            cursor: "pointer",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          Upgrade to Pro — $8/month
-        </button>
-        <div style={{ textAlign: "center", marginTop: 8, fontSize: 11, color: "var(--color-muted)" }}>
-          Limit resets at midnight
+        <div style={{ color: "var(--color-muted)", fontSize: 13, lineHeight: 1.5 }}>
+          You&apos;ve used your {FREE_LIMIT} free analyses for today. The limit resets at midnight (local time).
+          Thanks for using ChartSense — a paid tier with higher limits is planned for later.
         </div>
       </div>
     )
   }
 
-  if (remaining === FREE_LIMIT) return null // Full count — don't show until they've used one
+  if (remaining === FREE_LIMIT) return null
 
   const pct = (remaining / FREE_LIMIT) * 100
 

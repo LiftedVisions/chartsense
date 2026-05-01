@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 const SECTION_GAP = 64
 const CARD_GAP = 24
@@ -64,24 +64,6 @@ function Reveal({ children, style }: { children: ReactNode; style?: CSSPropertie
   )
 }
 
-const btnAccent: CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 6,
-  padding: "14px 22px",
-  borderRadius: 10,
-  background: "linear-gradient(135deg, var(--color-accent), var(--color-accent-deep))",
-  color: "var(--color-white)",
-  fontWeight: 700,
-  fontSize: 15,
-  textDecoration: "none",
-  border: "none",
-  cursor: "pointer",
-  fontFamily: "var(--font-body)",
-  boxShadow: "0 2px 8px color-mix(in srgb, var(--color-accent) 35%, transparent)",
-}
-
 const INDICATOR_IDS = ["guide-bb", "guide-macd", "guide-rsi", "guide-vol", "guide-htf"] as const
 const INDICATOR_LABELS = ["BB", "MACD", "RSI", "Vol", "HTF"] as const
 const INDICATOR_COLORS = [
@@ -93,6 +75,7 @@ const INDICATOR_COLORS = [
 ] as const
 
 export default function Guide() {
+  const location = useLocation()
   const heroRef = useRef<HTMLElement>(null)
   const [showStickyNav, setShowStickyNav] = useState(false)
   const [activeIdx, setActiveIdx] = useState(0)
@@ -124,10 +107,29 @@ export default function Guide() {
     }
   }, [updateScrollState])
 
+  /** Scroll document to an in-page target (more reliable than scrollIntoView alone with nested layouts). */
   const scrollToIndicator = useCallback((i: number) => {
     const id = INDICATOR_IDS[i]
     const el = document.getElementById(id)
-    el?.scrollIntoView({ behavior: "smooth", block: "start" })
+    if (!el) return
+    const top = el.getBoundingClientRect().top + window.scrollY
+    const offset = 10
+    window.scrollTo({ top: Math.max(0, top - offset), behavior: "smooth" })
+    window.history.replaceState(null, "", `${location.pathname}${location.search}#${id}`)
+  }, [location.pathname, location.search])
+
+  /** Deep link: /guide#guide-bb — run after layout so targets have correct geometry. */
+  useEffect(() => {
+    const raw = window.location.hash.replace(/^#/, "")
+    if (!raw || !(INDICATOR_IDS as readonly string[]).includes(raw)) return
+    const id = raw
+    const tid = window.setTimeout(() => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const top = el.getBoundingClientRect().top + window.scrollY
+      window.scrollTo({ top: Math.max(0, top - 10), behavior: "smooth" })
+    }, 80)
+    return () => clearTimeout(tid)
   }, [])
 
   return (
@@ -197,15 +199,18 @@ export default function Guide() {
           </p>
           <div className="guide-hero-tags" role="navigation" aria-label="Jump to indicator sections">
             {(["BB", "MACD", "RSI", "Volume", "HTF Bias"] as const).map((label, i) => (
-              <button
+              <a
                 key={label}
-                type="button"
                 className="guide-hero-tag"
-                onClick={() => scrollToIndicator(i)}
+                href={`${location.pathname}${location.search}#${INDICATOR_IDS[i]}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToIndicator(i)
+                }}
                 aria-label={`Go to ${label} section`}
               >
                 {label}
-              </button>
+              </a>
             ))}
           </div>
         </section>
@@ -475,7 +480,7 @@ export default function Guide() {
           >
             Ready to put it into practice?
           </h2>
-          <Link to="/analyze" style={btnAccent}>
+          <Link to="/analyze" className="btn-primary">
             Analyze a Chart →
           </Link>
         </section>

@@ -6,12 +6,12 @@ interface Section {
 
 function getSectionColor(title: string): string {
   if (title.includes("INDICATOR READINGS")) return "#4f8ef7"
-  if (title.includes("INDICATOR VOTE"))     return "#ffd700"
+  if (title.includes("INDICATOR VOTE"))     return "var(--color-gold)"
   if (title.includes("CURRENT SITUATION"))  return "#00bcd4"
   if (title.includes("ENTRY ASSESSMENT"))   return "#f7a34f"
   if (title.includes("TRADE LEVELS"))       return "#26a69a"
   if (title.includes("PRE-TRADE"))          return "#8bc34a"
-  if (title.includes("BOTTOM LINE"))        return "#ffd700"
+  if (title.includes("BOTTOM LINE"))        return "var(--color-gold)"
   return "#4f8ef7"
 }
 
@@ -39,7 +39,7 @@ function LineItem({ text }: { text: string }) {
 
   if (text.includes("BULLISH") && !text.includes("NOT BULLISH")) { color = "#26a69a"; fontWeight = "bold" }
   else if (text.includes("BEARISH"))                              { color = "#ef5350"; fontWeight = "bold" }
-  else if (text.includes("NO TRADE") || text.includes("MIXED"))  { color = "#ffd700"; fontWeight = "bold" }
+  else if (text.includes("NO TRADE") || text.includes("MIXED"))  { color = "var(--color-gold-soft)"; fontWeight = "bold" }
   else if (text.includes("CONFIRMS") && !text.includes("NOT"))   { color = "#26a69a" }
   else if (text.includes("DOES NOT CONFIRM"))                     { color = "#ef5350" }
   else if (text.includes("[x]") || text.includes("[X]"))          { color = "#26a69a" }
@@ -79,6 +79,20 @@ export default function AnalysisResult({ text }: AnalysisResultProps) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      <p
+        style={{
+          margin: 0,
+          fontSize: 12,
+          lineHeight: 1.5,
+          color: "var(--color-muted)",
+          padding: "10px 12px",
+          borderRadius: 8,
+          background: "var(--color-card)",
+          border: "1px solid var(--color-divider)",
+        }}
+      >
+        AI-generated — verify levels and bias on your chart before acting. Not financial advice.
+      </p>
       {sections.map((sec, i) => (
         <div
           key={i}

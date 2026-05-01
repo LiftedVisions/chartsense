@@ -93,11 +93,7 @@ export default function Analyzer() {
       <AuthPanel />
 
       {/* Rate limit banner */}
-      <RateLimitBanner
-        remaining={remaining}
-        isLimited={isLimited}
-        onUpgradeClick={() => console.log("upgrade clicked — wire Stripe here")}
-      />
+      <RateLimitBanner remaining={remaining} isLimited={isLimited} />
 
       {/* Upload zone */}
       <div style={{ marginBottom: 12 }}>
@@ -141,7 +137,7 @@ export default function Analyzer() {
               padding: 14,
               background: loading || isLimited || !session || authLoading
                 ? "var(--color-card)"
-                : "linear-gradient(135deg, var(--color-accent), #3a7bd5)",
+                : "var(--color-accent)",
               border: "none",
               borderRadius: 10,
               color: loading || isLimited || !session || authLoading ? "var(--color-muted)" : "white",
@@ -153,10 +149,10 @@ export default function Analyzer() {
             }}
           >
             {loading
-              ? "⏳  Analyzing..."
+              ? "Analyzing…"
               : !session
-                ? "🔒  Sign in to analyze"
-                : "🔍  Analyze Chart"}
+                ? "Sign in to analyze"
+                : "Analyze chart"}
           </button>
         </>
       )}
@@ -211,7 +207,7 @@ export default function Analyzer() {
               fontFamily: "var(--font-body)",
             }}
           >
-            📷  Analyze Another Chart
+            Analyze another chart
           </button>
         </div>
       )}
