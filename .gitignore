@@ -38,3 +38,7 @@ dev-dist/
 
 # Tooling
 .playwright-mcp/
+
+# Daemon runtime state — never commit
+scripts/positions.json
+scripts/paper_trades.json
